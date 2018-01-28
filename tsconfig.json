@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "strict": true,
+    "moduleResolution": "node",
+    "sourceRoot": ".",
+    "sourceMap": true,
+    "baseUrl": "src",
+    "rootDir": "src",
+    "declaration": true,
+    "outDir": "out/",
+    "lib": [
+      "es5",
+      "es2015.core",
+      "es2015.collection",
+      "es2015.promise",
+      "dom"
+    ]
+  },
+  "exclude": [
+    "dist/index.d.ts",
+    "out/**/*.d.ts"
+  ]
+}

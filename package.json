@@ -1,0 +1,43 @@
+{
+  "name": "@poker/api-server",
+  "version": "0.1.0",
+  "description": "JS client for Poker API Server",
+  "main": "dist/poker-api-server",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "tslint --project tsconfig.json",
+    "tslint": "tslint",
+    "build": "tsc && npm run webpack -- --env.prod && npm run lint",
+    "webpack": "webpack",
+    "prepack": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/online-poker/poker-api-server.git"
+  },
+  "keywords": [
+    "poker",
+    "api"
+  ],
+  "author": "Andrey Kurdyumov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/online-poker/poker-api-server/issues"
+  },
+  "homepage": "https://github.com/online-poker/poker-api-server#readme",
+  "files": [
+    "dist/poker-api-server.js",
+    "dist/index.d.ts",
+    "LICENSE",
+    "README.md"
+  ],
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.4.1",
+    "dts-bundle": "^0.7.3",
+    "tslint": "^5.9.1",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0",
+    "isomorphic-fetch": "^2.2.1"
+  }
+}
