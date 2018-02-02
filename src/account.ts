@@ -171,14 +171,33 @@ export class Account {
         return jsonData;
     }
     public async getAccountHistory(
-        fromDate: string,
-        toDate: string,
-        fromAmount: number,
-        toAmount: number,
-        operationType: number): Promise<ApiResult<OperationData[]>> {
-        const dateFilter = `fromDate=${fromDate}&toDate=${toDate}`;
-        const amountFilter = `fromAmount=${fromAmount}&toAmount=${toAmount}`;
-        const queryString = `${dateFilter}&${amountFilter}&operationType=${operationType}`;
+        fromDate: string | null,
+        toDate: string | null,
+        fromAmount: number | null,
+        toAmount: number | null,
+        operationType: number | null): Promise<ApiResult<OperationData[]>> {
+        const parameters: string[] = [];
+        if (fromDate) {
+            parameters.push(`fromDate=${fromDate}`);
+        }
+
+        if (toDate) {
+            parameters.push(`toDate=${toDate}`);
+        }
+
+        if (fromAmount) {
+            parameters.push(`fromAmount=${fromAmount}`);
+        }
+
+        if (toAmount) {
+            parameters.push(`toAmount=${toAmount}`);
+        }
+
+        if (operationType) {
+            parameters.push(`operationType=${operationType}`);
+        }
+
+        const queryString = parameters.join("&");
         const response = await fetch(this.host + `/api/account/my/history?${queryString}`, getRequestInit());
         const jsonData = await response.json() as ApiResult<OperationData[]>;
         return jsonData;
