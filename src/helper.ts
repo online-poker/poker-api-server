@@ -4,6 +4,10 @@ export function setAuthToken(token: string | null) {
     authToken = token;
 }
 
+export function getAuthToken() {
+    return authToken;
+}
+
 export function getRequestInit(): RequestInit {
     const defaultHeaders = new Headers();
     defaultHeaders.append("Content-Type", "application/json");
