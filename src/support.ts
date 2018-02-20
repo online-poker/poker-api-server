@@ -1,7 +1,11 @@
 import { getPostRequestInit } from "./helper";
 import { StatusResponse } from "./response";
 
-export class Support {
+export interface ISupport {
+    contactUs(fullName: string, email: string, subject: string, message: string): Promise<StatusResponse>;
+}
+
+export class Support implements ISupport {
     constructor(public host: string) {
     }
     public async contactUs(fullName: string, email: string, subject: string, message: string): Promise<StatusResponse> {

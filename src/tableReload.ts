@@ -51,7 +51,14 @@ const del = {
     method: "DELETE",
 };
 
-export class TableReload {
+export interface ITableReload {
+    getTableReload(tableId: number): Promise<TableReloadInformation>;
+    confirmEmergencyReload(tableId: number): Promise<void>;
+    confirmTableReload(tableId: number): Promise<void>;
+    confirmSeatReload(tableId: number, seatId: number): Promise<void>;
+}
+
+export class TableReload implements ITableReload {
     constructor(public host: string) {
     }
 

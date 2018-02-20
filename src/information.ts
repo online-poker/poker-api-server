@@ -51,7 +51,25 @@ export interface AvatarsResponse extends StatusResponse {
     Avatars: string[];
 }
 
-export class Information {
+export interface IInformation {
+    getWellKnownBetStructure(): Promise<ApiResult<TournamentBetStructure[][]>>;
+    getWellKnownPrizeStructure(): Promise<ApiResult<TournamentPrizeStructure[][]>>;
+    getOnlinePlayers(): Promise<ApiResult<number[]>>;
+    /**
+     * Request server date.
+     */
+    getDate(): Promise<number>;
+    /**
+     * Perform version check.
+     */
+    getVersion(): Promise<VersionCheckResponse>;
+    getServerLayout(): Promise<AvatarsResponse>;
+    getDefaultAvatars(): Promise<AvatarsResponse>;
+    getNews(): Promise<ApiResult<string[]>>;
+    getBanners(format: number): Promise<ApiResult<BannerData[]>>;
+}
+
+export class Information implements IInformation {
     /**
      * Access to Information API endpoint.
      * @param host Host where Information endpoint located
