@@ -183,7 +183,22 @@ export enum TournamentStatus {
     LateRegistration,
 }
 
-export class Tournament {
+export interface ITournament {
+    getTournaments(
+        prizeCurrency: number,
+        tournamentType: number,
+        speed: number,
+        buyin: number,
+        maxPlayers: number): Promise<ApiResult<LobbyTournamentItem[]>>;
+    getTournament(tournamentId: number): Promise<ApiResult<TournamentDefinition>>;
+    register(tournamentId: number): Promise<StatusResponse>;
+    cancelRegistration(tournamentId: number): Promise<StatusResponse>;
+    rebuy(tournamentId: number, double: boolean): Promise<StatusResponse>;
+    addon(tournamentId: number): Promise<StatusResponse>;
+    getRegisteredTournaments(): Promise<ApiResult<TournamentPlayerStateDefinition[]>>;
+}
+
+export class Tournament implements ITournament {
     constructor(public host: string) {
     }
 

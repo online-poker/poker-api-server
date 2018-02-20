@@ -55,7 +55,34 @@ export interface GameTableModel {
     TournamentId?: number;
 }
 
-export class Game {
+export interface IGame {
+    getTables(
+        fullTables: boolean | null,
+        privateTables: number | null,
+        maxPlayers: number,
+        betLevels: number,
+        moneyType: number,
+        limitType: number,
+        showTournamentTables: boolean): Promise<ApiResult<LobbyTableItem[]>>;
+    getTableById(tableId: number): Promise<ApiResult<GameTableModel>>;
+    getSitingTables(): Promise<ApiResult<number[]>>;
+    sit(tableId: number, seat: number, amount: number, ticketCode: string): Promise<SitResponse>;
+    sitAnywhere(tableId: number, amount: number): Promise<SitResponse>;
+    standup(tableId: number): Promise<StatusResponse>;
+    fold(tableId: number): Promise<StatusResponse>;
+    checkOrCall(tableId: number): Promise<StatusResponse>;
+    betOrRaise(tableId: number, amount: number): Promise<StatusResponse>;
+    changeWaitQueueSettings(tableId: number, waitBigBlind: boolean): Promise<StatusResponse>;
+    addBalance(tableId: number, amount: number, ticketCode: string): Promise<AddBalanceResponse>;
+    sitOut(tableId: number): Promise<StatusResponse>;
+    comeBack(tableId: number): Promise<StatusResponse>;
+    muck(tableId: number): Promise<StatusResponse>;
+    showCards(tableId: number): Promise<StatusResponse>;
+    showHoleCard(tableId: number, cardPosition: number): Promise<StatusResponse>;
+    setTableParameters(tableId: number, openCardsAutomatically: boolean): Promise<StatusResponse>;
+}
+
+export class Game implements IGame {
     constructor(public host: string) {
     }
 

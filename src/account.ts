@@ -123,7 +123,59 @@ export interface UserRating {
     Stars: number;
 }
 
-export class Account {
+export interface IAccount {
+    logout(): Promise<StatusResponse>;
+    authenticate(login: string, password: string, rememberMe: boolean): Promise<AuthenticateResponse>;
+    activateAccount(login: string, token: string): Promise<StatusResponse>;
+    cancelAccountActivation(login: string, token: string): Promise<StatusResponse>;
+    changePassword(oldPassword: string, newPassword: string): Promise<StatusResponse>;
+    getAccount(): Promise<ApiResult<PersonalAccountData>>;
+    getPlayer(): Promise<ApiResult<PlayerDefinition>>;
+    getAccountHistory(
+        fromDate: string | null,
+        toDate: string | null,
+        fromAmount: number | null,
+        toAmount: number | null,
+        operationType: number | null): Promise<ApiResult<OperationData[]>>;
+    registerGuest(): Promise<RegisterGuestResponse>;
+    register(
+        login: string,
+        email: string,
+        password: string,
+        phoneNumber: string,
+        firstName: string,
+        lastName: string,
+        patronymicName: string,
+        country: number,
+        city: string,
+        additionalProperties: any): Promise<StatusResponse>;
+    /**
+     * Checks for ability to create user with given parameters.
+     * @param login Desired login for the user.
+     * @param email Desired email for the user.
+     * @param phoneNumber Desired phone number for the user
+     */
+    registrationCheck(
+        login: string,
+        email: string,
+        phoneNumber: string): Promise<StatusResponse>;
+    requestResetPassword(login: string, email: string): Promise<StatusResponse>;
+    resetPassword(token: string, newPassword: string): Promise<StatusResponse>;
+    resetAvatar(): Promise<StatusResponse>;
+    setAvatarUrl(url: string): Promise<StatusResponse>;
+    updatePlayerProfile(
+        phoneNumber: string,
+        firstName: string,
+        lastName: string,
+        patronymicName: string,
+        email: string,
+        country: number,
+        city: number): Promise<StatusResponse>;
+    uploadAvatar(image: any): Promise<StatusResponse>;
+    getBestPlayers(): Promise<ApiResult<UserRating[]>>;
+}
+
+export class Account implements IAccount {
     constructor(public host: string) {
     }
     public async logout() {
@@ -295,7 +347,7 @@ export class Account {
         const jsonData = await response.json() as StatusResponse;
         return jsonData;
     }
-    public uploadAvatar(image: any) {
+    public uploadAvatar(image: any): Promise<StatusResponse> {
         throw new Error("Not implmented.");
     }
     public async getBestPlayers(): Promise<ApiResult<UserRating[]>> {

@@ -5,7 +5,22 @@ export interface InboxMessagesData {
     Messages: string[];
 }
 
-export class Message {
+export interface IMessage {
+    send(recepient: number, subject: string, body: string): Promise<StatusResponse>;
+    getInboxMessages(
+        page: number,
+        pageSize: number,
+        filter: number,
+        sortOrder: boolean): Promise<ApiResult<InboxMessagesData>>;
+    getSentMessages(
+        page: number,
+        pageSize: number,
+        filter: number,
+        sortOrder: boolean): Promise<ApiResult<InboxMessagesData>>;
+    getMessage(id: number): Promise<ApiResult<InboxMessagesData>>;
+}
+
+export class Message implements IMessage {
     constructor(public host: string) {
     }
     public async send(recepient: number, subject: string, body: string): Promise<StatusResponse> {
@@ -28,7 +43,7 @@ export class Message {
         const jsonData = await response.json() as ApiResult<InboxMessagesData>;
         return jsonData;
     }
-    public async GetMessage(id: number) {
+    public async getMessage(id: number) {
         const data = { id };
         const response = await fetch(this.host + `/api/message/${id}`, getRequestInit());
         const jsonData = await response.json() as ApiResult<InboxMessagesData>;

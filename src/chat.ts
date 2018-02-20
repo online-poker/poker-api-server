@@ -1,7 +1,11 @@
 import { getPostRequestInit } from "./helper";
 import { ApiResult, StatusResponse } from "./response";
 
-export class Chat {
+export interface IChat {
+    send(tableId: number, message: string): Promise<StatusResponse>;
+}
+
+export class Chat implements IChat {
     constructor(public host: string) {
     }
 
