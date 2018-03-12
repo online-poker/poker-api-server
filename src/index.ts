@@ -5,5 +5,5 @@ export { Information } from "./information";
 export { Message } from "./message";
 export { Support } from "./support";
 export { TableReload } from "./tableReload";
-export { Tournament } from "./tournament";
+export { Tournament, TournamentPlayerStatus, TournamentOptionsEnum, TournamentStatus } from "./tournament";
 export { getAuthToken, setAuthToken } from "./helper";
