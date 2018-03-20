@@ -83,6 +83,11 @@ export interface TournamentDefinition {
     TournamentPlayers: TournamentPlayerDefinition[];
     BetLevel: number;
     PrizeAmount: number;
+
+    /**
+     * Gets or sets prize amount type.
+     */
+    PrizeAmountType?: number | null;
     CollectedPrizeAmount: number;
     JoinFee: number;
     BuyIn: number;
