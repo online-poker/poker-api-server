@@ -109,6 +109,11 @@ export interface TournamentDefinition {
     IsRegistered: boolean;
     ChipsAddedAtReBuy: number;
     ChipsAddedAtDoubleReBuy: number;
+
+    /**
+     * Amount of chips added at add-on.
+     */
+    ChipsAddedAtAddOn: number;
     Status: TournamentStatus;
     IsPaused: boolean;
     MinPlayers: number;
