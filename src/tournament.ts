@@ -1,4 +1,4 @@
-import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getRequestInit } from "./helper";
+import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getRequestInit, getQueryString } from "./helper";
 import { ApiResult, StatusResponse } from "./response";
 
 /**
@@ -225,7 +225,7 @@ export class Tournament implements ITournament {
             Speed: speed,
             TournamentType: tournamentType,
         };
-        const response = await fetch(this.host + `/api/tournaments`, getRequestInit());
+        const response = await fetch(this.host + `/api/tournaments?` + getQueryString(data), getRequestInit());
         const jsonData = await response.json() as ApiResult<LobbyTournamentItem[]>;
         return jsonData;
     }

@@ -1,12 +1,5 @@
-import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit } from "./helper";
+import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getQueryString } from "./helper";
 import { ApiResult, StatusResponse } from "./response";
-
-function getQueryString(params: any) {
-    const esc = encodeURIComponent;
-    return Object.keys(params)
-      .map((k) => esc(k) + "=" + esc(params[k]))
-      .join("&");
-}
 
 export interface AddBalanceResponse extends StatusResponse {
     Amount: number;
