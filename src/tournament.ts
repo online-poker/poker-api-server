@@ -1,4 +1,4 @@
-import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getRequestInit, getQueryString } from "./helper";
+import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getQueryString, getRequestInit } from "./helper";
 import { ApiResult, StatusResponse } from "./response";
 
 /**
