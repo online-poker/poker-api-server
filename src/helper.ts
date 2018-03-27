@@ -1,5 +1,12 @@
 let authToken: string | null = null;
 
+export function getQueryString(params: any) {
+    const esc = encodeURIComponent;
+    return Object.keys(params)
+      .map((k) => esc(k) + "=" + esc(params[k]))
+      .join("&");
+}
+
 export function setAuthToken(token: string | null) {
     authToken = token;
 }
