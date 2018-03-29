@@ -7,9 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "configure-ci": "node build/configure-ci.js",
-    "lint": "npx tslint --project tsconfig.json",
-    "build": "npx tsc && npm run webpack -- --env.prod && npm run lint",
-    "webpack": "npx webpack",
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc && npm run webpack -- --env.prod && npm run lint",
+    "webpack": "webpack",
     "prepack": "npm run build"
   },
   "repository": {
