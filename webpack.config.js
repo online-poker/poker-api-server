@@ -24,6 +24,7 @@ DtsBundlePlugin.prototype.apply = function (compiler) {
 module.exports = (env) => {
     const isDevBuild = !(env && env.prod);
     return [{
+        mode: isDevBuild ? "development" : "production",
         stats: { modules: false },
         entry: { 'poker-api-server': './src/index' },
         resolve: {
@@ -51,17 +52,15 @@ module.exports = (env) => {
         },
         plugins: [
             new CheckerPlugin(),
+            new DtsBundlePlugin(),
         ].concat(isDevBuild ? [
             // Plugins that apply in development builds only
-            new DtsBundlePlugin(),
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map', // Remove this line if you prefer inline source maps
                 moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
             })
         ] : [
                 // Plugins that apply in production builds only
-                new DtsBundlePlugin(),
-                new webpack.optimize.UglifyJsPlugin()
             ])
     }];
 };

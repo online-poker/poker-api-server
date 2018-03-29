@@ -7,10 +7,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "configure-ci": "node build/configure-ci.js",
-    "lint": "tslint --project tsconfig.json",
-    "tslint": "tslint",
-    "build": "tsc && npm run webpack -- --env.prod && npm run lint",
-    "webpack": "webpack",
+    "lint": "npx tslint --project tsconfig.json",
+    "build": "npx tsc && npm run webpack -- --env.prod && npm run lint",
+    "webpack": "npx webpack",
     "prepack": "npm run build"
   },
   "repository": {
@@ -34,11 +33,12 @@
     "README.md"
   ],
   "devDependencies": {
-    "awesome-typescript-loader": "^3.4.1",
+    "awesome-typescript-loader": "^4.0.1",
     "dts-bundle": "^0.7.3",
     "isomorphic-fetch": "^2.2.1",
     "tslint": "^5.9.1",
-    "typescript": "^2.8.0-rc",
-    "webpack": "^3.10.0"
+    "typescript": "^2.8.1",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
   }
 }
