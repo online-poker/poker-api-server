@@ -1,4 +1,4 @@
-import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getQueryString } from "./helper";
+import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getQueryString, getRequestInit } from "./helper";
 import { ApiResult, StatusResponse } from "./response";
 
 export interface AddBalanceResponse extends StatusResponse {
@@ -107,7 +107,8 @@ export class Game implements IGame {
         return jsonData;
     }
     public async getSitingTables() {
-        const response = await fetch(this.host + `/api/account/my/tables`);
+        const url = this.host + `/api/account/my/tables`;
+        const response = await fetch(url, getRequestInit());
         const jsonData = await response.json() as ApiResult<number[]>;
         return jsonData;
     }
