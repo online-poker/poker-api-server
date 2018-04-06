@@ -1,4 +1,4 @@
-import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit } from "./helper";
+import { getDeleteRequestInit, getPostRequestInit, getPutRequestInit, getRequestInit } from "./helper";
 import { ApiResult, StatusResponse } from "./response";
 
 function getQueryString(params: any) {
@@ -114,7 +114,8 @@ export class Game implements IGame {
         return jsonData;
     }
     public async getSitingTables() {
-        const response = await fetch(this.host + `/api/account/my/tables`);
+        const url = this.host + `/api/account/my/tables`;
+        const response = await fetch(url, getRequestInit());
         const jsonData = await response.json() as ApiResult<number[]>;
         return jsonData;
     }
